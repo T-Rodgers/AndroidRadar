@@ -83,6 +83,7 @@ fun bindPictureOfTheDay(imageView: ImageView, picture: PictureOfDay?) {
         Glide.with(imageView.context)
             .load(picture.url)
             .placeholder(R.drawable.placeholder_picture_of_day)
+            .error(R.drawable.ic_baseline_error_48)
             .into(imageView)
     }
 }
