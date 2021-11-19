@@ -40,11 +40,17 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
 
     init {
-        viewModelScope.launch {
-            asteroidRepository.refreshAsteroids()
-        }
         retrieveAsteroidsOfWeek()
         retrievePictureOfTheDay()
+        viewModelScope.launch {
+
+            try {
+                asteroidRepository.refreshAsteroids()
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
     }
 
     fun onNavigateToDetails(asteroid: Asteroid) {
