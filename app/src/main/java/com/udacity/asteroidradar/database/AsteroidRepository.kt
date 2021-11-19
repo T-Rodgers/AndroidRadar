@@ -14,8 +14,17 @@ import org.json.JSONObject
 
 class AsteroidRepository(private val database: AsteroidDatabase) {
 
+    val asteroidsOfCurrentWeek: LiveData<List<Asteroid>> =
+        Transformations.map(database.asteroidDao.getAsteroidsOfWeek(getCurrentDay(), getWeekFromCurrentDay())){
+            it.asDomainModel()
+        }
     val asteroids: LiveData<List<Asteroid>> =
         Transformations.map(database.asteroidDao.getAsteroids()){
+            it.asDomainModel()
+        }
+
+    val currentDayAsteroids: LiveData<List<Asteroid>> =
+        Transformations.map(database.asteroidDao.getCurrentDayAsteroids(getCurrentDay())){
             it.asDomainModel()
         }
 

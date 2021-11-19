@@ -57,7 +57,10 @@ fun TextView.setCodeName(asteroid: Asteroid?) {
 fun bindRecyclerView(recyclerView: RecyclerView, asteroids: List<Asteroid>?) {
 
     val adapter = recyclerView.adapter as AsteroidsAdapter
-    asteroids?.let { adapter.submitList(asteroids) }
+    asteroids?.let {
+        recyclerView.scheduleLayoutAnimation()
+        adapter.submitList(asteroids)
+    }
 
 }
 

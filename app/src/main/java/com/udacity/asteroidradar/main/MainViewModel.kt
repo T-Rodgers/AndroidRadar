@@ -34,12 +34,18 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val database = getDatabase(application)
     private val asteroidRepository = AsteroidRepository(database)
 
+    private val _asteroids = MutableLiveData<LiveData<List<Asteroid>>>()
+    val asteroids: LiveData<LiveData<List<Asteroid>>>
+        get() = _asteroids
+
+
     init {
-        retrieveAsteroids()
+        viewModelScope.launch {
+            asteroidRepository.refreshAsteroids()
+        }
+        retrieveAsteroidsOfWeek()
         retrievePictureOfTheDay()
     }
-
-    val asteroids = asteroidRepository.asteroids
 
     fun onNavigateToDetails(asteroid: Asteroid) {
         _navigateToDetails.value = asteroid
@@ -59,12 +65,42 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    private fun retrieveAsteroids() {
+    fun retrieveAsteroidsOfWeek() {
         viewModelScope.launch {
             _status.value = AsteroidApiStatus.LOADING
             try {
 
-                asteroidRepository.refreshAsteroids()
+                _asteroids.value = asteroidRepository.asteroidsOfCurrentWeek
+                _status.value = AsteroidApiStatus.DONE
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+                _status.value = AsteroidApiStatus.ERROR
+            }
+        }
+    }
+
+    fun retrieveCurrentDayAsteroids() {
+        viewModelScope.launch {
+            _status.value = AsteroidApiStatus.LOADING
+            try {
+
+                _asteroids.value = asteroidRepository.currentDayAsteroids
+                _status.value = AsteroidApiStatus.DONE
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+                _status.value = AsteroidApiStatus.ERROR
+            }
+        }
+    }
+
+    fun retrieveAllAsteroids() {
+        viewModelScope.launch {
+            _status.value = AsteroidApiStatus.LOADING
+            try {
+
+                _asteroids.value = asteroidRepository.asteroids
                 _status.value = AsteroidApiStatus.DONE
 
             } catch (e: Exception) {

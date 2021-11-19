@@ -48,6 +48,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/asteroid_recycler"
             android:layout_width="0dp"
+            android:layoutAnimation="@anim/layout_animation"
             app:asteroidList="@{viewModel.asteroids}"
             android:padding="@dimen/small_dp"
             android:layout_height="0dp"
