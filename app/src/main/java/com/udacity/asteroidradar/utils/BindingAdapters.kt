@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.udacity.asteroidradar.main.AsteroidApiStatus
 import com.udacity.asteroidradar.models.Asteroid
 import com.udacity.asteroidradar.models.AsteroidsAdapter
@@ -57,8 +58,10 @@ fun TextView.setCodeName(asteroid: Asteroid?) {
 fun bindRecyclerView(recyclerView: RecyclerView, asteroids: List<Asteroid>?) {
 
     val adapter = recyclerView.adapter as AsteroidsAdapter
-    asteroids?.let {
+    if (adapter.itemCount == 0) {
         recyclerView.scheduleLayoutAnimation()
+    }
+    asteroids?.let {
         adapter.submitList(asteroids)
     }
 
@@ -85,8 +88,6 @@ fun bindPictureOfTheDay(imageView: ImageView, picture: PictureOfDay?) {
     picture?.let {
         Glide.with(imageView.context)
             .load(picture.url)
-            .placeholder(R.drawable.placeholder_picture_of_day)
-            .error(R.drawable.ic_baseline_error_48)
             .into(imageView)
     }
 }

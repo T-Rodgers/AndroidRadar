@@ -75,7 +75,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             _status.value = AsteroidApiStatus.LOADING
             try {
-
                 _asteroids.value = asteroidRepository.asteroidsOfCurrentWeek
                 _status.value = AsteroidApiStatus.DONE
 
@@ -90,7 +89,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             _status.value = AsteroidApiStatus.LOADING
             try {
-
                 _asteroids.value = asteroidRepository.currentDayAsteroids
                 _status.value = AsteroidApiStatus.DONE
 
@@ -105,7 +103,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             _status.value = AsteroidApiStatus.LOADING
             try {
-
                 _asteroids.value = asteroidRepository.asteroids
                 _status.value = AsteroidApiStatus.DONE
 
