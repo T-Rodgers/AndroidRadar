@@ -5,8 +5,8 @@ import androidx.lifecycle.Transformations
 import com.udacity.asteroidradar.api.API_KEY
 import com.udacity.asteroidradar.api.AsteroidApiService
 import com.udacity.asteroidradar.api.parseAsteroidsJsonResult
-import com.udacity.asteroidradar.getCurrentDay
-import com.udacity.asteroidradar.getWeekFromCurrentDay
+import com.udacity.asteroidradar.utils.getCurrentDay
+import com.udacity.asteroidradar.utils.getWeekFromCurrentDay
 import com.udacity.asteroidradar.models.Asteroid
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

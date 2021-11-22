@@ -1,4 +1,4 @@
-package com.udacity.asteroidradar
+package com.udacity.asteroidradar.utils
 
 import android.view.View
 import android.widget.ImageView
@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
+import com.udacity.asteroidradar.R
 import com.udacity.asteroidradar.main.AsteroidApiStatus
 import com.udacity.asteroidradar.models.Asteroid
 import com.udacity.asteroidradar.models.AsteroidsAdapter
@@ -17,8 +17,12 @@ import com.udacity.asteroidradar.models.PictureOfDay
 fun bindAsteroidStatusImage(imageView: ImageView, isHazardous: Boolean) {
     if (isHazardous) {
         imageView.setImageResource(R.drawable.ic_status_potentially_hazardous)
+        imageView.contentDescription =
+            imageView.context.getString(R.string.potentially_hazardous_asteroid_image)
     } else {
         imageView.setImageResource(R.drawable.ic_status_normal)
+        imageView.contentDescription =
+            imageView.context.getString(R.string.not_hazardous_asteroid_image)
     }
 }
 
@@ -26,8 +30,12 @@ fun bindAsteroidStatusImage(imageView: ImageView, isHazardous: Boolean) {
 fun bindDetailsStatusImage(imageView: ImageView, isHazardous: Boolean) {
     if (isHazardous) {
         imageView.setImageResource(R.drawable.asteroid_hazardous)
+        imageView.contentDescription =
+            imageView.context.getString(R.string.potentially_hazardous_asteroid_image)
     } else {
         imageView.setImageResource(R.drawable.asteroid_safe)
+        imageView.contentDescription =
+            imageView.context.getString(R.string.not_hazardous_asteroid_image)
     }
 }
 
@@ -58,11 +66,9 @@ fun TextView.setCodeName(asteroid: Asteroid?) {
 fun bindRecyclerView(recyclerView: RecyclerView, asteroids: List<Asteroid>?) {
 
     val adapter = recyclerView.adapter as AsteroidsAdapter
-    if (adapter.itemCount == 0) {
-        recyclerView.scheduleLayoutAnimation()
-    }
     asteroids?.let {
         adapter.submitList(asteroids)
+        recyclerView.scheduleLayoutAnimation()
     }
 
 }
@@ -85,9 +91,16 @@ fun bindApiStatus(progressBar: ProgressBar, status: AsteroidApiStatus?) {
 
 @BindingAdapter("pictureOfTheDay")
 fun bindPictureOfTheDay(imageView: ImageView, picture: PictureOfDay?) {
-    picture?.let {
+    if (picture == null) {
+        imageView.contentDescription =
+            imageView.context.getString(R.string.this_is_nasa_s_picture_of_day_showing_nothing_yet)
+    } else {
         Glide.with(imageView.context)
             .load(picture.url)
+            .placeholder(R.drawable.placeholder_picture_of_day)
+            .error(R.drawable.ic_baseline_error_48)
             .into(imageView)
+        imageView.contentDescription =
+            imageView.context.getString(R.string.nasa_picture_of_day_content_description_format, picture.title)
     }
 }

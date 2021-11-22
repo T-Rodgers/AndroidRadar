@@ -3,5 +3,6 @@
     <dimen name="standard_dp">8dp</dimen>
     <dimen name="large_dp">16dp</dimen>
     <dimen name="small_dp">6dp</dimen>
-    <dimen name="xsmall_dp">2dp</dimen>
+    <dimen name="xsmall_dp">4dp</dimen>
+    <dimen name="xxsmall_dp">2dp</dimen>
 </resources>

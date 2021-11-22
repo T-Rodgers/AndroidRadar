@@ -1,6 +1,5 @@
-package com.udacity.asteroidradar
+package com.udacity.asteroidradar.utils
 
-import com.udacity.asteroidradar.utils.Constants
 import java.text.SimpleDateFormat
 import java.util.*
 

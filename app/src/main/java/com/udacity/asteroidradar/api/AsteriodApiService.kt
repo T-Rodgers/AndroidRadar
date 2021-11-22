@@ -5,6 +5,7 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.udacity.asteroidradar.BuildConfig
 import com.udacity.asteroidradar.models.PictureOfDay
+import com.udacity.asteroidradar.utils.Constants.BASE_URL
 import kotlinx.coroutines.Deferred
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -14,7 +15,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
-const val BASE_URL = "https://api.nasa.gov/"
 const val API_KEY = BuildConfig.API_KEY
 
 private val moshi = Moshi.Builder()
