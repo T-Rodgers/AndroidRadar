@@ -1,9 +1,21 @@
-# Purpose of this Folder
+# Asteroid Radar
+This application retrieves near earth asteroids using the NASA NeoWS(Near Earth Object Web Service) API
 
-This folder should contain the scaffolded project files to get a student started on their project. This repo will be added to the Classroom for students to use, so please do not have any solutions in this folder.
+## Overview
+Each asteroid shows:
 
-## Note: Android Kotlin Gradle Update
-Use the updated Gradle version in the `~/gradle/wrapper/gradle-wrapper.properties` file:
-```
-distributionUrl = https\://services.gradle.org/distributions/gradle-6.1.1-all.zip
-```
+- Code Name
+- Close Approach Date
+- Absolute Magnitude
+- Estimated Diameter
+- Relative Velocity
+- Distance From Earth
+- If asteroid is potentially hazardous
+
+This application is built using the following libraries:
+
+- Glide for loading and formatting images.
+- Room Database for data persistence/data-caching when offline
+- Databinding
+- MVVM and repository pattern
+- Retrofit to get movies from NASA NeoWs API
