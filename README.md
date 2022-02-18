@@ -18,4 +18,4 @@ This application is built using the following libraries:
 - Room Database for data persistence/data-caching when offline
 - Databinding
 - MVVM and repository pattern
-- Retrofit to get movies from NASA NeoWs API
+- Retrofit to get asteroids from NASA NeoWs API
